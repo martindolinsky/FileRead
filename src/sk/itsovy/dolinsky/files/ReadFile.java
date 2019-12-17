@@ -192,6 +192,7 @@ public class ReadFile {
 					}
 				}
 			}
+
 			/**
 			 * read numbers using scanner
 			 */
