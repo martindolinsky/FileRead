@@ -1,0 +1,35 @@
+public void sortNumbers(String source, String target) {
+		try {
+			File myFile = new File(source);
+			Scanner myReader = new Scanner(myFile);
+			File otherFile = new File(target);
+			FileWriter write = new FileWriter(target);
+			FileReader fr = new FileReader(source);
+			BufferedReader read = new BufferedReader(fr);
+			int sum = 0;
+			int count = 0;
+			System.out.println();
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				for (int i = 0; i < data.length(); i++) {
+					int number = Integer.parseInt(data);
+					count++;
+				}
+				List<Integer> intList = new ArrayList<>(count);
+				for (int i = 0; i < data.length(); i++) {
+					int number = Integer.parseInt(data);
+					intList.add(number);
+				}
+
+				intList.sort(Comparator.naturalOrder());
+				for(int counter: intList){
+					System.out.println(counter);
+					write.write(String.valueOf(counter + " "));
+				}
+			}
+			myReader.close();
+			write.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
