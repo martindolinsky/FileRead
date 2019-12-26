@@ -1,9 +1,7 @@
 package sk.itsovy.dolinsky.files;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -30,6 +28,10 @@ public class Main {
         System.out.println();
         rf.sortNumbers("/Users/martindolinsky/Downloads/FileRead/numbers","/Users/martindolinsky/Downloads/FileRead/numbers_copy");
         System.out.println();
+
+        System.out.println();
+        rf.analyzeTextFile("/Users/martindolinsky/Downloads/FileRead/input");
+        rf.hash("/Users/martindolinsky/Downloads/FileRead/input","/Users/martindolinsky/Downloads/FileRead/output");
 
 
 

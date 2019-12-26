@@ -49,7 +49,6 @@ public class ReadFile {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void copyFile(String sourceFile) {
@@ -105,22 +104,16 @@ public class ReadFile {
 			Scanner myReader = new Scanner(myFile);
 			File otherFile = new File(target);
 			FileWriter write = new FileWriter(target);
-			FileReader fr = new FileReader(source);
-			BufferedReader read = new BufferedReader(fr);
 			int sum = 0;
 			int count = 0;
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				for (int i = 0; i < data.length(); i++) {
-					int number = Integer.parseInt(data);
-					count++;
-					write.write(String.valueOf(number + "\n"));
-					System.out.println(number);
-				}
-				for (int i = 0; i < data.length(); i++) {
-					int number = Integer.parseInt(data);
-					sum += number;
-				}
+				int number = Integer.parseInt(data);
+				count++;
+				write.write(String.valueOf(number + "\n"));
+				System.out.println(number);
+				int number1 = Integer.parseInt(data);
+				sum += number1;
 			}
 			System.out.println("Sum:" + sum);
 			write.write(String.valueOf(sum / (double) count));
@@ -145,6 +138,7 @@ public class ReadFile {
 			int count = 0;
 			System.out.println();
 			List<Integer> intList = new ArrayList<>();
+
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
 				for (int i = 0; i < data.length(); i++) {
@@ -156,6 +150,7 @@ public class ReadFile {
 					intList.add(number);
 				}
 			}
+
 			intList.sort(Comparator.naturalOrder());
 			for(int counter: intList){
 				System.out.println(counter);
@@ -207,6 +202,69 @@ public class ReadFile {
 			myReader.close();
 			write.close();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void analyzeTextFile(String source) {
+		try {
+			File myFile = new File(source);
+			FileReader fr = new FileReader(source);
+			BufferedReader myReader = new BufferedReader(fr);
+			int[] arr = new int[95];
+			int temp;
+			while ((temp = myReader.read()) != -1){
+				arr[temp-32] += 1;
+				System.out.println(temp);
+			}
+			System.out.println("\n" + "ASCII NUMBER: COUNT");
+			for (int i=0; i<arr.length; i++){
+				if (arr[i] > 0) {
+					System.out.println((char) (i + 32) + " : " + arr[i]);
+				}
+			}
+			myReader.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void hash(String source, String target) {
+		try {
+			File myFile = new File(source);
+			File otherFile = new File(target);
+			FileWriter write = new FileWriter(target);
+			FileReader fr = new FileReader(source);
+			BufferedReader read = new BufferedReader(fr);
+			int data;
+
+			while ((data = read.read()) != -1) {
+				if (data == 32) {
+					write.write(" ");
+				}
+				if (data > 47 && data < 58) { // 123
+					if (data > 54) {
+						data = data - 10;
+					}
+					write.write((char) (data) + 3);
+				}
+				if (data > 64 && data < 91) { // ABC
+					if (data > 87) {
+						data = data - 26;
+					}
+					write.write((char) (data) + 3);
+				}
+				if (data > 96 && data < 123) { //abc
+					if (data > 119) {
+						data = data - 26;
+					}
+					write.write((char) (data) + 3);
+				}
+			}
+			read.close();
+			write.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
